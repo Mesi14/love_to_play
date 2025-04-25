@@ -9,15 +9,13 @@ const GameGrid = () => {
   const {data, error, isLoading} = useGames();
   const skeletons = [1, 2, 3, 4, 5, 6];
 
+  if (error) return <Text>{error}</Text>
   return (
-    <>
-    {error && <Text>{error}</Text>}
     <SimpleGrid columns={{sm: 1, md: 2, lg: 4, xl: 5}} padding={10} spacing={10}>
-      {isLoading && skeletons.map(skeleton => <GameCardContainer><GameCardSkeleton key={skeleton} /></GameCardContainer>)}
+      {isLoading && skeletons.map(skeleton => <GameCardContainer key={skeleton}><GameCardSkeleton key={skeleton} /></GameCardContainer>)}
       {data.map(game => (
        <GameCardContainer><Gamecard key={game.id} game={game} /></GameCardContainer>))}
     </SimpleGrid>
-    </>
   )
 }
 
